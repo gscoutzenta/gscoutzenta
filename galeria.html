@@ -5,6 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Galería · Grupo Scout Zenta</title>
   <meta name="description" content="Galería histórica de actividades, campamentos y salidas del Grupo Scout Zenta." />
+  <link rel="canonical" href="https://scoutzenta.com/galeria" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://scoutzenta.com/galeria" />
+  <meta property="og:title" content="Galería · Grupo Scout Zenta" />
+  <meta property="og:description" content="Galería histórica de actividades, campamentos y salidas del Grupo Scout Zenta." />
+  <meta property="og:image" content="https://scoutzenta.com/assets/logo.png" />
+  <meta property="og:locale" content="es_AR" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Galería · Grupo Scout Zenta" />
+  <meta name="twitter:description" content="Galería histórica de actividades, campamentos y salidas del Grupo Scout Zenta." />
+  <meta name="twitter:image" content="https://scoutzenta.com/assets/logo.png" />
   <meta name="theme-color" content="#0b2b5d" />
   <link rel="icon" href="assets/logosf.png" type="image/png" />
 
@@ -414,9 +425,9 @@
       ["021", ""], ["022", ""], ["023", ""], ["024", ""], ["025", ""], ["026", ""],
       ["027", ""], ["028", ""], ["029", ""], ["030", ""], ["031", ""], ["032", ""],
       ["033", ""], ["034", ""],
-      ["035.webp", "Escolta de banderas · bandera de grupo y bandera argentina"],
-      ["036.webp", "Equipo de educadores del Grupo Scout Zenta"],
-      ["037.webp", "Dinámica de integración en un encuentro scout"]
+      ["035", "Escolta de banderas · bandera de grupo y bandera argentina"],
+      ["036", "Equipo de educadores del Grupo Scout Zenta"],
+      ["037", "Dinámica de integración en un encuentro scout"]
     ];
 
     // Leyendas genéricas (seguras, ciertas para cualquier foto del grupo).
@@ -429,9 +440,9 @@
       "Momentos que nos hacen comunidad"
     ];
 
-    // Si el nombre ya trae extensión (ej "035.webp") se usa tal cual; si no, se asume .jpg
+    // Si el nombre ya trae extensión (ej "fiesta.jpg") se usa tal cual; si no, se asume .webp
     const PHOTOS = FOTOS.map(([n]) =>
-      `assets/img/recuerdos/zenta-recuerdo-${n.includes('.') ? n : n + '.jpg'}`);
+      `assets/img/recuerdos/zenta-recuerdo-${n.includes('.') ? n : n + '.webp'}`);
     const CAPTIONS = FOTOS.map(([, txt], i) => txt && txt.trim() ? txt.trim() : GENERICAS[i % GENERICAS.length]);
 
     const grid = document.getElementById('gallery-grid');
