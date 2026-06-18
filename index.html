@@ -650,7 +650,11 @@
       .stat:not(:last-child)::after { display: none; }
       .stat-brand .mini-emblem { width: 64px; height: 64px; }
       .about-grid { grid-template-columns: 1fr; gap: 30px; }
-      .about-visual { height: 340px; }
+      /* En celular: las tarjetas dejan de flotar (se amontonaban) y van en fila ordenada */
+      .about-visual { height: auto; min-height: 160px; display: flex; align-items: center; justify-content: center; }
+      .photo-cards { position: static; inset: auto; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; width: 100%; }
+      .pcard { position: static; width: auto; flex: 1 1 30%; min-width: 95px; max-width: 150px; animation: none; padding: 16px 12px; }
+      .pc-1, .pc-2, .pc-3 { position: static; top: auto; left: auto; right: auto; bottom: auto; }
       .contact-grid { grid-template-columns: 1fr; }
       .timeline::before { left: 18px; }
       .tl-item, .tl-item:nth-child(even) {
@@ -885,7 +889,7 @@
           <div class="tl-card">
             <span class="tl-year now">Hoy</span>
             <h3><i class="fa-solid fa-fire"></i> Siempre Listos</h3>
-            <p>Conducido por <strong>Carlos Cristhian Galarza</strong>. Más de 60 niños y jóvenes activos en las 4 ramas.</p>
+            <p>Conducido por <strong>Carlos Cristhian Galarza</strong>. Estamos <strong>retomando las actividades</strong> con un grupo de 4 chicos que arranca esta nueva etapa. ¡Te esperamos para crecer juntos!</p>
           </div>
         </div>
       </div>
