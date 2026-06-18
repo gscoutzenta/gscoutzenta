@@ -152,6 +152,21 @@ body {
   transform: translateY(-2px);
   box-shadow: 0 8px 28px rgba(247, 168, 11, 0.45);
 }
+/* Botón secundario "Acceso" (lleva al panel de inscriptos) */
+.nav-access {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 9px 16px;
+  background: transparent;
+  color: var(--gold-light);
+  border: 1px solid var(--line);
+  border-radius: 12px; text-decoration: none;
+  font-weight: 600; font-size: 0.88rem;
+  transition: all 0.25s;
+}
+.nav-access:hover {
+  border-color: var(--gold); color: var(--gold);
+  background: rgba(247, 168, 11, 0.08);
+}
 .nav-toggle {
   display: none; background: transparent; border: none;
   color: var(--text); font-size: 1.4rem; cursor: pointer;
@@ -190,6 +205,15 @@ body {
   color: var(--navy-deep) !important;
   border-radius: 12px; text-align: center;
   font-weight: 700; text-decoration: none;
+}
+.mobile-access {
+  margin-top: 12px; display: block;
+  padding: 13px;
+  background: transparent;
+  color: var(--gold-light) !important;
+  border: 1px solid var(--line);
+  border-radius: 12px; text-align: center;
+  font-weight: 600; text-decoration: none;
 }
 
 /* ===== BOTONES ===== */
