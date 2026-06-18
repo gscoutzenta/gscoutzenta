@@ -936,13 +936,10 @@
 
         <form
           method="POST"
-          action="https://formsubmit.co/ajax/gscoutzenta@gmail.com"
+          action="/api/contacto"
           class="contact-form reveal delay-1" id="contact-form"
         >
-          <input type="hidden" name="_subject" value="Nuevo mensaje desde scoutzenta.com" />
-          <input type="hidden" name="_template" value="table" />
-          <input type="hidden" name="_captcha" value="false" />
-          <p style="display:none;"><label>No completar: <input name="_honey" /></label></p>
+          <p style="display:none;" aria-hidden="true"><label>No completar: <input name="_honey" tabindex="-1" autocomplete="off" /></label></p>
           <span class="form-tag">Respondemos rápido</span>
           <h3>Mandanos un mensaje</h3>
           <p>Completá el formulario y te respondemos por email o WhatsApp en menos de 24 hs.</p>

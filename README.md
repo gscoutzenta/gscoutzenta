@@ -33,10 +33,20 @@ Es un sitio **100% estático**, sin build. Vercel sirve los archivos tal cual.
 
 ## Formulario de contacto
 
-Usa [FormSubmit](https://formsubmit.co) (sin backend). Los mensajes llegan a
-`scout.zenta@gmail.com`. **La primera vez** que alguien envía el formulario,
-FormSubmit manda un email de confirmación a esa casilla: hay que hacer clic
-una sola vez para activarlo.
+Usa una función serverless de Vercel (`api/contacto.js`) que envía el correo con
+[Resend](https://resend.com). Los mensajes llegan a `gscoutzenta@gmail.com`
+(el email público mostrado en el sitio sigue siendo `scout.zenta@gmail.com`).
+
+Variables de entorno en Vercel (Settings → Environment Variables):
+
+| Variable | Valor | Obligatoria |
+|---|---|---|
+| `RESEND_API_KEY` | la API key de Resend (`re_...`) | sí |
+| `MAIL_TO` | `gscoutzenta@gmail.com` | no (default) |
+| `MAIL_FROM` | `Grupo Scout Zenta <contacto@scoutzenta.com>` | no (default: `onboarding@resend.dev`) |
+
+Para enviar desde `@scoutzenta.com` hay que verificar el dominio en Resend
+(agregar los registros DNS que indique, en IONOS).
 
 ## Agregar fotos a la galería
 
