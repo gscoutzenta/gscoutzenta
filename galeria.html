@@ -192,8 +192,19 @@
       border-color: var(--gold);
       box-shadow: 0 22px 44px -16px rgba(0,0,0,0.75);
     }
-    .g-item:hover img { transform: scale(1.06); filter: brightness(0.72); }
+    .g-item:hover img { transform: scale(1.06); filter: brightness(0.6); }
     .g-item:hover::after { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    .g-cap {
+      position: absolute; left: 0; right: 0; bottom: 0;
+      padding: 26px 16px 14px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.85));
+      color: #fff; font-size: 0.86rem; font-weight: 600;
+      line-height: 1.35; text-align: left;
+      transform: translateY(8px); opacity: 0;
+      transition: opacity 0.35s ease, transform 0.35s ease;
+      pointer-events: none;
+    }
+    .g-item:hover .g-cap { opacity: 1; transform: translateY(0); }
 
     /* Lightbox */
     .lightbox {
@@ -227,6 +238,13 @@
     .lb-close { top: 24px; right: 24px; }
     .lb-prev { left: 24px; top: 50%; transform: translateY(-50%); }
     .lb-next { right: 24px; top: 50%; transform: translateY(-50%); }
+    .lb-caption {
+      position: absolute; bottom: 58px; left: 50%;
+      transform: translateX(-50%);
+      max-width: 80vw; text-align: center;
+      color: #fff; font-weight: 600; font-size: 1rem;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.8);
+    }
     .lb-counter {
       position: absolute; bottom: 22px; left: 50%;
       transform: translateX(-50%);
@@ -276,7 +294,6 @@
       <li><a href="eventos.html"><i class="fa-solid fa-calendar-days"></i> Eventos</a></li>
       <li><a href="faq.html"><i class="fa-solid fa-circle-question"></i> FAQ</a></li>
       <li><a href="glosas.html"><i class="fa-solid fa-feather-pointed"></i> Glosas</a></li>
-      <li><a href="recursos.html"><i class="fa-solid fa-file-pdf"></i> Recursos</a></li>
     </ul>
     <a href="index.html#contacto" class="mobile-cta"><i class="fa-solid fa-fire"></i> Sumate</a>
   </aside>
@@ -353,7 +370,6 @@
             <li><a href="eventos.html">Eventos</a></li>
             <li><a href="faq.html">FAQ</a></li>
             <li><a href="glosas.html">Glosas</a></li>
-            <li><a href="recursos.html">Recursos</a></li>
           </ul>
         </div>
         <div>
@@ -377,17 +393,41 @@
     <button class="lb-nav lb-prev" id="lb-prev" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
     <img class="lb-img" id="lb-img" src="" alt="Recuerdo del Grupo Scout Zenta" />
     <button class="lb-nav lb-next" id="lb-next" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+    <div class="lb-caption" id="lb-caption"></div>
     <div class="lb-counter" id="lb-counter"></div>
   </div>
 
   <script src="assets/js/zenta.js"></script>
   <script>
-    // === Galería de recuerdos ===
-    const PHOTOS = [
-      "002","004","005","006","007","008","009","010","011","012","013","014",
-      "015","016","017","018","019","020","021","022","023","024","025","026",
-      "027","028","029","030","031","032","033","034"
-    ].map(n => `assets/img/recuerdos/zenta-recuerdo-${n}.jpg`);
+    // ============================================================
+    //  Galería de recuerdos del Grupo Scout Zenta
+    // ============================================================
+    //  Cada número es un archivo en assets/img/recuerdos/
+    //  Para ponerle una LEYENDA real a una foto, escribila al lado.
+    //  Si la dejás vacía (""), se usa una leyenda genérica automática.
+    //  Ej:  ["002", "Campamento de verano 2019"]
+    // ------------------------------------------------------------
+    const FOTOS = [
+      ["002", ""], ["004", ""], ["005", ""], ["006", ""], ["007", ""], ["008", ""],
+      ["009", ""], ["010", ""], ["011", ""], ["012", ""], ["013", ""], ["014", ""],
+      ["015", ""], ["016", ""], ["017", ""], ["018", ""], ["019", ""], ["020", ""],
+      ["021", ""], ["022", ""], ["023", ""], ["024", ""], ["025", ""], ["026", ""],
+      ["027", ""], ["028", ""], ["029", ""], ["030", ""], ["031", ""], ["032", ""],
+      ["033", ""], ["034", ""]
+    ];
+
+    // Leyendas genéricas (seguras, ciertas para cualquier foto del grupo).
+    const GENERICAS = [
+      "Grupo Scout Zenta · Siempre Listos",
+      "Un recuerdo de nuestra historia",
+      "Más de medio siglo de aventura",
+      "Vivencias de la comunidad Zenta",
+      "Aventura scout en Orán",
+      "Momentos que nos hacen comunidad"
+    ];
+
+    const PHOTOS = FOTOS.map(([n]) => `assets/img/recuerdos/zenta-recuerdo-${n}.jpg`);
+    const CAPTIONS = FOTOS.map(([, txt], i) => txt && txt.trim() ? txt.trim() : GENERICAS[i % GENERICAS.length]);
 
     const grid = document.getElementById('gallery-grid');
     PHOTOS.forEach((src, i) => {
@@ -395,7 +435,9 @@
       a.className = 'g-item';
       a.href = src;
       a.dataset.index = i;
-      a.innerHTML = `<img src="${src}" alt="Recuerdo del Grupo Scout Zenta ${i + 1}" loading="lazy" />`;
+      a.innerHTML =
+        `<img src="${src}" alt="${CAPTIONS[i]}" loading="lazy" />` +
+        `<span class="g-cap">${CAPTIONS[i]}</span>`;
       grid.appendChild(a);
     });
 
@@ -403,11 +445,13 @@
     const lb = document.getElementById('lightbox');
     const lbImg = document.getElementById('lb-img');
     const lbCounter = document.getElementById('lb-counter');
+    const lbCaption = document.getElementById('lb-caption');
     let current = 0;
 
     function show(i) {
       current = (i + PHOTOS.length) % PHOTOS.length;
       lbImg.src = PHOTOS[current];
+      lbCaption.textContent = CAPTIONS[current];
       lbCounter.textContent = `${current + 1} / ${PHOTOS.length}`;
     }
     function openLb(i) { show(i); lb.classList.add('open'); document.body.style.overflow = 'hidden'; }

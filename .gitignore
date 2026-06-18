@@ -12,3 +12,5 @@ desktop.ini
 
 # Dependencias (no se usan, pero por si acaso)
 node_modules/
+
+_preview-server.js
