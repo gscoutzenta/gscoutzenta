@@ -413,7 +413,10 @@
       ["015", ""], ["016", ""], ["017", ""], ["018", ""], ["019", ""], ["020", ""],
       ["021", ""], ["022", ""], ["023", ""], ["024", ""], ["025", ""], ["026", ""],
       ["027", ""], ["028", ""], ["029", ""], ["030", ""], ["031", ""], ["032", ""],
-      ["033", ""], ["034", ""]
+      ["033", ""], ["034", ""],
+      ["035.webp", "Escolta de banderas · bandera de grupo y bandera argentina"],
+      ["036.webp", "Equipo de educadores del Grupo Scout Zenta"],
+      ["037.webp", "Dinámica de integración en un encuentro scout"]
     ];
 
     // Leyendas genéricas (seguras, ciertas para cualquier foto del grupo).
@@ -426,7 +429,9 @@
       "Momentos que nos hacen comunidad"
     ];
 
-    const PHOTOS = FOTOS.map(([n]) => `assets/img/recuerdos/zenta-recuerdo-${n}.jpg`);
+    // Si el nombre ya trae extensión (ej "035.webp") se usa tal cual; si no, se asume .jpg
+    const PHOTOS = FOTOS.map(([n]) =>
+      `assets/img/recuerdos/zenta-recuerdo-${n.includes('.') ? n : n + '.jpg'}`);
     const CAPTIONS = FOTOS.map(([, txt], i) => txt && txt.trim() ? txt.trim() : GENERICAS[i % GENERICAS.length]);
 
     const grid = document.getElementById('gallery-grid');
