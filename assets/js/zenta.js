@@ -72,7 +72,7 @@
   // Botón flotante de WhatsApp (se inyecta en todas las páginas)
   (function injectWhatsApp() {
     const WA = 'https://wa.me/5493878359312?text=' +
-      encodeURIComponent('Hola! Quiero hacer una consulta sobre el Grupo Scout Zenta');
+      encodeURIComponent('Hola! Quiero info para anotar a mi hijo/a en el Grupo Scout Zenta');
     const css = `
       .wa-float{position:fixed;right:20px;bottom:20px;z-index:350;width:60px;height:60px;
         border-radius:50%;background:#25d366;color:#fff;display:flex;align-items:center;
